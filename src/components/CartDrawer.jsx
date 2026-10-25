@@ -47,17 +47,17 @@ const CartDrawer = ({
                 Order Placed Successfully!
               </h3>
               <p style={{ fontSize: 14, color: '#555', marginBottom: 12 }}>
-                Thank you for your purchase on Amazon Books. Your books are being packed and will arrive tomorrow.
+                Thank you for your purchase on BookVerse. Your books are being packed and will arrive tomorrow.
               </p>
               <div style={{ fontSize: 13, color: '#888' }}>
                 Redirecting back to your library...
               </div>
             </div>
           ) : isCheckingOut ? (
-            /* Mock Amazon Checkout Form */
+            /* Mock BookVerse Checkout Form */
             <form onSubmit={handleCheckoutSubmit}>
               <h3 style={{ fontSize: 18, fontWeight: 800, marginBottom: 16, color: '#111' }}>
-                Amazon 1-Click Fast Checkout
+                BookVerse 1-Click Fast Checkout
               </h3>
 
               <div style={{ background: '#f8f9fa', padding: 14, borderRadius: 6, marginBottom: 16, border: '1px solid #ddd' }}>
@@ -140,7 +140,7 @@ const CartDrawer = ({
           ) : cartItems.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '60px 10px' }}>
               <FaShoppingCart style={{ fontSize: 48, color: '#ccc', marginBottom: 16 }} />
-              <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>Your Amazon Cart is empty</h3>
+              <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>Your BookVerse Cart is empty</h3>
               <p style={{ fontSize: 13, color: '#666', marginBottom: 18 }}>
                 Explore bestsellers, multilingual picks, and children stories to fill your cart.
               </p>
@@ -208,7 +208,7 @@ const CartDrawer = ({
             </button>
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, fontSize: 11, color: '#666', marginTop: 10 }}>
-              <FaShieldAlt style={{ color: '#007185' }} /> 100% Purchase Protection with Amazon Guarantee
+              <FaShieldAlt style={{ color: '#007185' }} /> 100% Purchase Protection with BookVerse Guarantee
             </div>
           </div>
         )}

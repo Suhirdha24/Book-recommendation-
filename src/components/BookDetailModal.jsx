@@ -259,7 +259,7 @@ const BookDetailModal = ({
               className="btn-buy-now"
               onClick={() => {
                 onAddToCart({ ...book, price: currentPrice, format: selectedFormat }, quantity);
-                alert(`Order confirmed for ${quantity}x "${book.title}" (${selectedFormat})! Thank you for ordering on Amazon Books.`);
+                alert(`Order confirmed for ${quantity}x "${book.title}" (${selectedFormat})! Thank you for ordering on BookVerse.`);
                 onClose();
               }}
             >
@@ -280,7 +280,7 @@ const BookDetailModal = ({
                 <FaShieldAlt style={{ color: '#007185' }} /> Secure transaction
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <FaTruck style={{ color: '#007185' }} /> Ships from Amazon Books Fulfillment
+                <FaTruck style={{ color: '#007185' }} /> Ships from BookVerse Fulfillment
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <FaUndo style={{ color: '#007185' }} /> 7 Days Replacement Policy
@@ -427,7 +427,7 @@ const BookDetailModal = ({
                   <div style={{ width: 28, height: 28, borderRadius: '50%', background: '#ff9900', color: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 12 }}>
                     {(r.userName || 'U')[0].toUpperCase()}
                   </div>
-                  <span className="review-author-name">{r.userName || 'Amazon Customer'}</span>
+                  <span className="review-author-name">{r.userName || 'BookVerse Reader'}</span>
                   <span className="verified-badge">✓ Verified Purchase</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>

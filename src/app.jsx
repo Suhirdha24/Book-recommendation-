@@ -304,7 +304,7 @@ const App = () => {
         <>
           {/* Bestsellers Shelf */}
           <BookCarousel
-            title="🏆 Amazon Bestsellers & Top Rated"
+            title="🏆 BookVerse Bestsellers &amp; Top Rated"
             subtitle="The most gifted, loved, and widely read books worldwide"
             books={bestsellerBooks}
             onSelectBook={(b) => setSelectedBookDetail(b)}

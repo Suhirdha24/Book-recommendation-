@@ -29,7 +29,7 @@ async function connectDB() {
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', service: 'Amazon-Style Book Recommendation API', timestamp: new Date() });
+  res.json({ status: 'ok', service: 'BookVerse Recommendation API', timestamp: new Date() });
 });
 
 // GET /api/metadata - Languages, Genres, Age Groups, Formats

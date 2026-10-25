@@ -58,11 +58,11 @@ const AmazonHeader = ({
   return (
     <header className="amazon-header">
       <div className="header-top">
-        {/* Amazon Logo */}
-        <div className="logo-container" onClick={onResetToHome} title="Return to Amazon Books Home">
+        {/* BookVerse Logo */}
+        <div className="logo-container" onClick={onResetToHome} title="Return to BookVerse Home">
           <FaBook className="logo-icon" />
           <div className="logo-text">
-            amazon<span className="logo-suffix">books</span>
+            book<span className="logo-suffix">verse</span>
           </div>
         </div>
 

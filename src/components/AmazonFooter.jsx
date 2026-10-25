@@ -14,10 +14,10 @@ const AmazonFooter = ({ onScrollToTop, onSelectLanguage }) => {
         <div>
           <h4 className="footer-col-title">Get to Know Us</h4>
           <ul className="footer-col-list">
-            <li><a href="#about" onClick={(e) => e.preventDefault()}>About Amazon Books</a></li>
+            <li><a href="#about" onClick={(e) => e.preventDefault()}>About BookVerse</a></li>
             <li><a href="#careers" onClick={(e) => e.preventDefault()}>Careers &amp; Editorial</a></li>
             <li><a href="#press" onClick={(e) => e.preventDefault()}>Press Releases</a></li>
-            <li><a href="#science" onClick={(e) => e.preventDefault()}>Amazon Science &amp; AI Recommendation</a></li>
+            <li><a href="#science" onClick={(e) => e.preventDefault()}>BookVerse Science &amp; AI Recommendation</a></li>
           </ul>
         </div>
 
@@ -25,8 +25,8 @@ const AmazonFooter = ({ onScrollToTop, onSelectLanguage }) => {
           <h4 className="footer-col-title">Connect with Us</h4>
           <ul className="footer-col-list">
             <li><a href="#facebook" onClick={(e) => e.preventDefault()}>Facebook Book Club</a></li>
-            <li><a href="#twitter" onClick={(e) => e.preventDefault()}>Twitter / X @AmazonBooks</a></li>
-            <li><a href="#instagram" onClick={(e) => e.preventDefault()}>Instagram @AmazonReads</a></li>
+            <li><a href="#twitter" onClick={(e) => e.preventDefault()}>Twitter / X @BookVerse</a></li>
+            <li><a href="#instagram" onClick={(e) => e.preventDefault()}>Instagram @BookVerseReads</a></li>
             <li><a href="#goodreads" onClick={(e) => e.preventDefault()}>Goodreads Community</a></li>
           </ul>
         </div>
@@ -34,8 +34,8 @@ const AmazonFooter = ({ onScrollToTop, onSelectLanguage }) => {
         <div>
           <h4 className="footer-col-title">Make Money with Us</h4>
           <ul className="footer-col-list">
-            <li><a href="#sell" onClick={(e) => e.preventDefault()}>Sell on Amazon</a></li>
-            <li><a href="#kdp" onClick={(e) => e.preventDefault()}>Kindle Direct Publishing (KDP)</a></li>
+            <li><a href="#sell" onClick={(e) => e.preventDefault()}>Sell on BookVerse</a></li>
+            <li><a href="#kdp" onClick={(e) => e.preventDefault()}>BookVerse Author Publishing</a></li>
             <li><a href="#affiliate" onClick={(e) => e.preventDefault()}>Become an Affiliate</a></li>
             <li><a href="#advertise" onClick={(e) => e.preventDefault()}>Advertise Your Books</a></li>
           </ul>
@@ -55,7 +55,7 @@ const AmazonFooter = ({ onScrollToTop, onSelectLanguage }) => {
       {/* Language Bar in Footer */}
       <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', padding: '20px 16px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 700, color: '#febd69', fontSize: 16 }}>
-          <FaBook /> amazon<span style={{ fontStyle: 'italic', color: '#fff' }}>books</span>
+          <FaBook /> book<span style={{ fontStyle: 'italic', color: '#fff' }}>verse</span>
         </div>
 
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', fontSize: 12 }}>
@@ -88,7 +88,7 @@ const AmazonFooter = ({ onScrollToTop, onSelectLanguage }) => {
 
       {/* Footer Bottom Legal */}
       <div className="footer-bottom">
-        <p>© 2026 Amazon Book Recommendation Platform Inc. or its affiliates. Designed with rich multimodal recommendation AI for every age and language.</p>
+        <p>© 2026 BookVerse Multilingual Book Recommendation Inc. or its affiliates. Designed with rich recommendation AI for every age and language.</p>
         <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginTop: 8, fontSize: 11 }}>
           <a href="#terms" onClick={(e) => e.preventDefault()} style={{ color: '#999' }}>Conditions of Use</a>
           <a href="#privacy" onClick={(e) => e.preventDefault()} style={{ color: '#999' }}>Privacy Notice</a>
