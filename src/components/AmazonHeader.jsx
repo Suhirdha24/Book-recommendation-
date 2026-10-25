@@ -116,7 +116,7 @@ const AmazonHeader = ({
             <div
               className="nav-item"
               onClick={() => setShowLangDropdown(!showLangDropdown)}
-              title="Change Book Language"
+              title="Filter by Language"
             >
               <div className="lang-dropdown-btn">
                 <span className="lang-flag">{currentLangObj.flag}</span>
@@ -171,12 +171,6 @@ const AmazonHeader = ({
             )}
           </div>
 
-          {/* AI Matcher Quiz Shortcut */}
-          <div className="nav-item" onClick={onOpenQuiz} title="Personalized Recommendation Quiz">
-            <div className="nav-line-1">Book Matcher</div>
-            <div className="nav-line-2" style={{ color: '#febd69' }}>30s Quiz ⚡</div>
-          </div>
-
           {/* Wishlist / Reading Shelf */}
           <div className="nav-item" onClick={onOpenWishlist} title="My Reading Shelf & Wishlist">
             <div className="nav-line-1">Your Lists</div>
@@ -192,7 +186,7 @@ const AmazonHeader = ({
               <FaShoppingCart />
               <span className="cart-badge">{cartCount}</span>
             </div>
-            <div className="nav-line-2" style={{ marginTop: 8 }}>Cart</div>
+            <div className="nav-line-2" style={{ marginLeft: 2 }}>Cart</div>
           </div>
         </div>
       </div>
