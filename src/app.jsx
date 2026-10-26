@@ -11,6 +11,8 @@ import LookInsideModal from './components/LookInsideModal';
 import RecommendationQuiz from './components/RecommendationQuiz';
 import CartDrawer from './components/CartDrawer';
 import WishlistDrawer from './components/WishlistDrawer';
+import AuthModal from './components/AuthModal';
+import AllMenuDrawer from './components/AllMenuDrawer';
 import AmazonFooter from './components/AmazonFooter';
 import { FaGlobeAsia, FaBookOpen, FaChild, FaSortAmountDown } from 'react-icons/fa';
 
@@ -41,6 +43,28 @@ const App = () => {
   const [isQuizOpen, setIsQuizOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [isAllMenuOpen, setIsAllMenuOpen] = useState(false);
+
+  // User Profile state
+  const [currentUser, setCurrentUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('bookverse_user');
+      return saved ? JSON.parse(saved) : null;
+    } catch (e) {
+      return null;
+    }
+  });
+
+  useEffect(() => {
+    try {
+      if (currentUser) {
+        localStorage.setItem('bookverse_user', JSON.stringify(currentUser));
+      } else {
+        localStorage.removeItem('bookverse_user');
+      }
+    } catch (e) {}
+  }, [currentUser]);
 
   // Cart & Wishlist persistence
   const [cart, setCart] = useState(() => {
@@ -215,6 +239,16 @@ const App = () => {
     setSortBy('featured');
   };
 
+  const handleShowAllBooks = () => {
+    handleResetFilters();
+    setTimeout(() => {
+      const el = document.getElementById('all-books-catalog');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -235,9 +269,11 @@ const App = () => {
         onOpenWishlist={() => setIsWishlistOpen(true)}
         onOpenQuiz={() => setIsQuizOpen(true)}
         onResetToHome={handleResetFilters}
+        currentUser={currentUser}
+        onOpenAuth={() => setIsAuthOpen(true)}
       />
 
-      {/* 2. Sub-Navigation Bar (Age Groups, Languages, AI Matcher) */}
+      {/* 2. Sub-Navigation Bar (Age Groups, Languages, AI Matcher, All Books) */}
       <AmazonSubNav
         selectedAgeGroup={selectedAgeGroup}
         setSelectedAgeGroup={setSelectedAgeGroup}
@@ -246,6 +282,10 @@ const App = () => {
         selectedGenre={selectedGenre}
         setSelectedGenre={setSelectedGenre}
         onOpenQuiz={() => setIsQuizOpen(true)}
+        onToggleAllMenu={() => setIsAllMenuOpen(true)}
+        onShowAllBooks={handleShowAllBooks}
+        currentUser={currentUser}
+        onOpenAuth={() => setIsAuthOpen(true)}
       />
 
       {/* 3. Hero Banner Carousel */}
@@ -344,7 +384,7 @@ const App = () => {
       )}
 
       {/* 6. Main Catalog Section (Amazon Left Sidebar Filters + Results Grid) */}
-      <div className="catalog-wrapper">
+      <div className="catalog-wrapper" id="all-books-catalog">
         {/* Left Faceted Filters */}
         <FilterSidebar
           selectedLanguage={selectedLanguage}
@@ -476,6 +516,41 @@ const App = () => {
         onRemoveFromWishlist={handleRemoveFromWishlist}
         onAddToCart={handleAddToCart}
         onSelectBook={(b) => setSelectedBookDetail(b)}
+      />
+
+      {/* All Categories & Navigation Menu Drawer */}
+      <AllMenuDrawer
+        isOpen={isAllMenuOpen}
+        onClose={() => setIsAllMenuOpen(false)}
+        currentUser={currentUser}
+        onOpenAuth={() => setIsAuthOpen(true)}
+        onSelectGenre={(g) => {
+          setSelectedGenre(g);
+          document.getElementById('all-books-catalog')?.scrollIntoView({ behavior: 'smooth' });
+        }}
+        onSelectLanguage={(l) => {
+          setSelectedLanguage(l);
+          document.getElementById('all-books-catalog')?.scrollIntoView({ behavior: 'smooth' });
+        }}
+        onSelectAgeGroup={(a) => {
+          setSelectedAgeGroup(a);
+          document.getElementById('all-books-catalog')?.scrollIntoView({ behavior: 'smooth' });
+        }}
+        onShowAllCatalog={handleShowAllBooks}
+        onOpenQuiz={() => setIsQuizOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+      />
+
+      {/* User Sign In, Registration & Reading Profile Modal */}
+      <AuthModal
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        currentUser={currentUser}
+        onLogin={(user) => setCurrentUser(user)}
+        onLogout={() => setCurrentUser(null)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        onOpenQuiz={() => setIsQuizOpen(true)}
       />
 
       {/* 8. Amazon Footer */}

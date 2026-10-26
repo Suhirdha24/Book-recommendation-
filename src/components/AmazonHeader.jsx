@@ -6,6 +6,7 @@ import {
   FaGlobe,
   FaShoppingCart,
   FaHeart,
+  FaUser,
   FaChevronDown,
   FaTimes
 } from 'react-icons/fa';
@@ -33,7 +34,9 @@ const AmazonHeader = ({
   onOpenCart,
   onOpenWishlist,
   onOpenQuiz,
-  onResetToHome
+  onResetToHome,
+  currentUser,
+  onOpenAuth
 }) => {
   const [showLangDropdown, setShowLangDropdown] = useState(false);
   const [deliveryLocation, setDeliveryLocation] = useState('New Delhi 110001');
@@ -169,6 +172,23 @@ const AmazonHeader = ({
                 ))}
               </div>
             )}
+          </div>
+
+          {/* User Profile / Account & Lists */}
+          <div
+            className="nav-item nav-account-btn"
+            onClick={onOpenAuth}
+            title={currentUser ? "Your Account & Profile" : "Sign In to Your Account"}
+            id="header-account-btn"
+          >
+            <div className="nav-line-1" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {currentUser ? `Hello, ${currentUser.name.split(' ')[0]}` : 'Hello, sign in'}
+            </div>
+            <div className="nav-line-2" style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+              <FaUser style={{ fontSize: 11, color: '#febd69' }} />
+              <span>{currentUser ? 'Account & Lists' : 'Sign In'}</span>
+              <FaChevronDown style={{ fontSize: 8, opacity: 0.8 }} />
+            </div>
           </div>
 
           {/* Wishlist / Reading Shelf */}

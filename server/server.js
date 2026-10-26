@@ -372,6 +372,76 @@ app.post('/api/reviews', async (req, res) => {
   }
 });
 
+// POST /api/auth/register - Register new user
+app.post('/api/auth/register', async (req, res) => {
+  try {
+    const database = await connectDB();
+    const usersCol = database.collection('users');
+    const { name, email, preferredLanguage, preferredAgeGroup, readingGoal } = req.body;
+
+    if (!email || !name) {
+      return res.status(400).json({ error: 'Name and email are required' });
+    }
+
+    const existing = await usersCol.findOne({ email: email.toLowerCase().trim() });
+    if (existing) {
+      return res.status(400).json({ error: 'User with this email already exists' });
+    }
+
+    const userDoc = {
+      name: name.trim(),
+      email: email.toLowerCase().trim(),
+      preferredLanguage: preferredLanguage || 'English',
+      preferredAgeGroup: preferredAgeGroup || 'Adults',
+      readingGoal: Number(readingGoal) || 12,
+      booksRead: 0,
+      joinedDate: new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+      createdAt: new Date()
+    };
+
+    const result = await usersCol.insertOne(userDoc);
+    res.status(201).json({ success: true, user: { ...userDoc, _id: result.insertedId } });
+  } catch (error) {
+    console.error('Registration error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// POST /api/auth/login - User login
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const database = await connectDB();
+    const usersCol = database.collection('users');
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ error: 'Email is required' });
+    }
+
+    let user = await usersCol.findOne({ email: email.toLowerCase().trim() });
+    if (!user) {
+      // Auto-create friendly guest/user if not found so user never gets stuck!
+      const userDoc = {
+        name: email.split('@')[0],
+        email: email.toLowerCase().trim(),
+        preferredLanguage: 'English',
+        preferredAgeGroup: 'Adults',
+        readingGoal: 10,
+        booksRead: 1,
+        joinedDate: new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+        createdAt: new Date()
+      };
+      const result = await usersCol.insertOne(userDoc);
+      user = { ...userDoc, _id: result.insertedId };
+    }
+
+    res.json({ success: true, user });
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`===============================================`);
   console.log(`Amazon Book Recommendation Server running on http://localhost:${PORT}`);

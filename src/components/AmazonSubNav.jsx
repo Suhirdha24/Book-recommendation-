@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaBars, FaBolt, FaFire, FaAward, FaChevronDown } from 'react-icons/fa';
+import { FaBars, FaBolt, FaFire, FaAward, FaChevronDown, FaUser } from 'react-icons/fa';
 
 const cleanAgeGroups = [
   { id: 'Kids', label: '🧒 Kids (0-8)' },
@@ -33,23 +33,30 @@ const AmazonSubNav = ({
   setSelectedLanguage,
   selectedGenre,
   setSelectedGenre,
-  onOpenQuiz
+  onOpenQuiz,
+  onToggleAllMenu,
+  onShowAllBooks,
+  currentUser,
+  onOpenAuth
 }) => {
   const [showLangMenu, setShowLangMenu] = useState(false);
+
+  const handleAllBooksClick = () => {
+    if (onShowAllBooks) onShowAllBooks();
+    if (onToggleAllMenu) onToggleAllMenu();
+  };
 
   return (
     <nav className="sub-nav">
       <div className="sub-nav-container">
         {/* Left Section: All, Quiz, & Age Groups */}
         <div className="sub-nav-left">
-          {/* All Toggle */}
+          {/* All Toggle (Opens Amazon All Menu Drawer & Scrolls to Catalog) */}
           <button
             className={`sub-nav-item ${selectedAgeGroup === 'All' && selectedLanguage === 'All' && selectedGenre === 'All' ? 'active' : ''}`}
-            onClick={() => {
-              setSelectedAgeGroup('All');
-              setSelectedLanguage('All');
-              setSelectedGenre('All');
-            }}
+            onClick={handleAllBooksClick}
+            title="Browse all book categories, languages, and age groups"
+            id="subnav-all-books-btn"
           >
             <FaBars style={{ marginRight: 6 }} />
             <span>All Books</span>
@@ -141,6 +148,30 @@ const AmazonSubNav = ({
           >
             <FaFire style={{ color: '#ff9900', marginRight: 4 }} />
             <span>Trending</span>
+          </button>
+
+          <span className="sub-nav-divider">|</span>
+
+          {/* Quick Profile / Sign In Button */}
+          <button
+            className="sub-nav-item sub-nav-auth-btn"
+            onClick={onOpenAuth}
+            title={currentUser ? "Your Profile & Reading Stats" : "Sign In to Your Account"}
+            id="subnav-auth-btn"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              background: currentUser ? 'rgba(254, 189, 105, 0.22)' : 'rgba(255, 255, 255, 0.15)',
+              border: '1px solid rgba(254, 189, 105, 0.6)',
+              borderRadius: 4,
+              padding: '4px 10px',
+              color: '#ffffff',
+              fontWeight: 700
+            }}
+          >
+            <FaUser style={{ color: '#febd69', fontSize: 11 }} />
+            <span>{currentUser ? `Hi, ${currentUser.name.split(' ')[0]}` : 'Sign In'}</span>
           </button>
         </div>
       </div>

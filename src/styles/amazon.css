@@ -222,12 +222,12 @@ button {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   flex-shrink: 0;
 }
 
 .nav-item {
-  padding: 6px 12px;
+  padding: 6px 10px;
   border: 1px solid transparent;
   border-radius: var(--radius-sm);
   cursor: pointer;
@@ -235,11 +235,40 @@ button {
   flex-direction: column;
   justify-content: center;
   color: #ffffff;
-  transition: border-color 0.15s ease;
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .nav-item:hover {
   border-color: #ffffff;
+}
+
+.nav-account-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(254, 189, 105, 0.5) !important;
+  border-radius: 4px;
+}
+
+.nav-account-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: var(--amz-gold) !important;
+}
+
+@media (max-width: 1100px) {
+  .deliver-box {
+    display: none !important;
+  }
+}
+
+@media (max-width: 860px) {
+  .search-category-select {
+    display: none !important;
+  }
+  .header-actions {
+    gap: 8px;
+  }
+  .nav-item {
+    padding: 4px 6px;
+  }
 }
 
 .nav-line-1 {
@@ -1542,6 +1571,26 @@ button {
 @keyframes slideLeft {
   from { transform: translateX(100%); }
   to { transform: translateX(0); }
+}
+
+@keyframes slideRight {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+.drawer-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 13px;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.drawer-nav-row:hover {
+  color: #b12704;
 }
 
 .drawer-header {
