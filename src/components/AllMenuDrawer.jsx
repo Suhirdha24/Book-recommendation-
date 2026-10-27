@@ -9,7 +9,8 @@ import {
   FaHeart,
   FaChevronRight,
   FaGlobe,
-  FaChild
+  FaChild,
+  FaBoxOpen
 } from 'react-icons/fa';
 
 const AllMenuDrawer = ({
@@ -22,7 +23,8 @@ const AllMenuDrawer = ({
   onSelectAgeGroup,
   onShowAllCatalog,
   onOpenQuiz,
-  onOpenWishlist
+  onOpenWishlist,
+  onOpenOrders
 }) => {
   if (!isOpen) return null;
 
@@ -242,6 +244,18 @@ const AllMenuDrawer = ({
           <div style={{ padding: '16px 20px 30px' }}>
             <div style={{ fontSize: 15, fontWeight: 800, color: '#111', marginBottom: 10 }}>
               Help &amp; Settings
+            </div>
+            <div
+              className="drawer-nav-row"
+              onClick={() => {
+                onClose();
+                if (onOpenOrders) onOpenOrders();
+              }}
+            >
+              <span style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#007185', fontWeight: 700 }}>
+                <FaBoxOpen style={{ color: '#febd69' }} /> Your Orders &amp; Package Tracking
+              </span>
+              <FaChevronRight style={{ fontSize: 11, color: '#888' }} />
             </div>
             <div
               className="drawer-nav-row"

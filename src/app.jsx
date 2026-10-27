@@ -13,6 +13,7 @@ import CartDrawer from './components/CartDrawer';
 import WishlistDrawer from './components/WishlistDrawer';
 import AuthModal from './components/AuthModal';
 import AllMenuDrawer from './components/AllMenuDrawer';
+import OrdersModal from './components/OrdersModal';
 import AmazonFooter from './components/AmazonFooter';
 import { FaGlobeAsia, FaBookOpen, FaChild, FaSortAmountDown } from 'react-icons/fa';
 
@@ -45,6 +46,79 @@ const App = () => {
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isAllMenuOpen, setIsAllMenuOpen] = useState(false);
+  const [isOrdersOpen, setIsOrdersOpen] = useState(false);
+
+  // Orders history state
+  const [orders, setOrders] = useState(() => {
+    try {
+      const saved = localStorage.getItem('bookverse_orders');
+      if (saved) return JSON.parse(saved);
+      return [
+        {
+          orderId: 'BV-984210',
+          createdAt: new Date().toISOString(),
+          items: [
+            {
+              title: 'The Way of Kings',
+              author: 'Brandon Sanderson',
+              format: 'Hardcover',
+              price: 799,
+              quantity: 1,
+              coverImage: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80'
+            }
+          ],
+          subtotal: 799,
+          total: 799,
+          shippingAddress: {
+            fullName: 'Suhirdha Sivakumar',
+            street: '42 Literature Avenue, Book District',
+            city: 'Chennai',
+            pincode: '600001'
+          },
+          status: 'Confirmed - Preparing for Dispatch',
+          deliveryDate: 'Tomorrow, by 11:00 AM'
+        }
+      ];
+    } catch (e) {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('bookverse_orders', JSON.stringify(orders));
+    } catch (e) {}
+  }, [orders]);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const res = await fetch('/api/orders');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.orders && data.orders.length > 0) {
+            setOrders((prev) => {
+              const existingIds = new Set(prev.map(o => o.orderId || o._id));
+              const newOrders = data.orders.filter(o => !existingIds.has(o.orderId || o._id));
+              return [...newOrders, ...prev];
+            });
+          }
+        }
+      } catch (e) {}
+    };
+    fetchOrders();
+  }, []);
+
+  const handlePlaceOrder = async (orderData) => {
+    setOrders((prev) => [orderData, ...prev]);
+    try {
+      await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderData)
+      });
+    } catch (e) {}
+  };
 
   // User Profile state
   const [currentUser, setCurrentUser] = useState(() => {
@@ -265,8 +339,10 @@ const App = () => {
         setSelectedLanguage={setSelectedLanguage}
         cartCount={cart.reduce((s, i) => s + i.quantity, 0)}
         wishlistCount={wishlist.length}
+        ordersCount={orders.length}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenOrders={() => setIsOrdersOpen(true)}
         onOpenQuiz={() => setIsQuizOpen(true)}
         onResetToHome={handleResetFilters}
         currentUser={currentUser}
@@ -286,6 +362,8 @@ const App = () => {
         onShowAllBooks={handleShowAllBooks}
         currentUser={currentUser}
         onOpenAuth={() => setIsAuthOpen(true)}
+        onOpenOrders={() => setIsOrdersOpen(true)}
+        ordersCount={orders.length}
       />
 
       {/* 3. Hero Banner Carousel */}
@@ -506,6 +584,9 @@ const App = () => {
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveFromCart}
         onClearCart={handleClearCart}
+        onPlaceOrder={handlePlaceOrder}
+        onOpenOrders={() => setIsOrdersOpen(true)}
+        ordersCount={orders.length}
       />
 
       {/* Wishlist / Reading Shelf Drawer */}
@@ -539,6 +620,7 @@ const App = () => {
         onShowAllCatalog={handleShowAllBooks}
         onOpenQuiz={() => setIsQuizOpen(true)}
         onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenOrders={() => setIsOrdersOpen(true)}
       />
 
       {/* User Sign In, Registration & Reading Profile Modal */}
@@ -550,7 +632,19 @@ const App = () => {
         onLogout={() => setCurrentUser(null)}
         onOpenWishlist={() => setIsWishlistOpen(true)}
         onOpenCart={() => setIsCartOpen(true)}
+        onOpenOrders={() => setIsOrdersOpen(true)}
+        ordersCount={orders.length}
         onOpenQuiz={() => setIsQuizOpen(true)}
+      />
+
+      {/* Returns & Orders Tracking Modal */}
+      <OrdersModal
+        isOpen={isOrdersOpen}
+        onClose={() => setIsOrdersOpen(false)}
+        orders={orders}
+        onAddToCart={handleAddToCart}
+        onSelectBook={(b) => setSelectedBookDetail(b)}
+        onExploreBooks={handleShowAllBooks}
       />
 
       {/* 8. Amazon Footer */}

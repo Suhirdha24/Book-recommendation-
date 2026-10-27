@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaTimes, FaTrash, FaShoppingCart, FaShieldAlt, FaCheckCircle, FaTruck } from 'react-icons/fa';
+import { FaTimes, FaTrash, FaShoppingCart, FaShieldAlt, FaCheckCircle, FaTruck, FaBoxOpen } from 'react-icons/fa';
 
 const CartDrawer = ({
   isOpen,
@@ -7,7 +7,10 @@ const CartDrawer = ({
   cartItems = [],
   onUpdateQuantity,
   onRemoveItem,
-  onClearCart
+  onClearCart,
+  onPlaceOrder,
+  onOpenOrders,
+  ordersCount = 0
 }) => {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
@@ -19,13 +22,37 @@ const CartDrawer = ({
 
   const handleCheckoutSubmit = (e) => {
     e.preventDefault();
+    const orderData = {
+      orderId: 'BV-' + Math.floor(100000 + Math.random() * 900000),
+      createdAt: new Date().toISOString(),
+      items: [...cartItems],
+      subtotal: subtotal,
+      total: subtotal,
+      shippingFee: 0,
+      shippingAddress: {
+        fullName: 'Suhirdha Sivakumar',
+        street: '42 Literature Avenue, Book District',
+        city: 'Chennai',
+        pincode: '600001'
+      },
+      status: 'Confirmed - Preparing for Dispatch',
+      deliveryDate: 'Tomorrow, by 11:00 AM'
+    };
+
+    if (onPlaceOrder) {
+      onPlaceOrder(orderData);
+    }
+
     setOrderPlaced(true);
     setTimeout(() => {
       onClearCart();
       setOrderPlaced(false);
       setIsCheckingOut(false);
       onClose();
-    }, 3000);
+      if (onOpenOrders) {
+        onOpenOrders();
+      }
+    }, 2000);
   };
 
   return (
@@ -138,13 +165,35 @@ const CartDrawer = ({
               </div>
             </form>
           ) : cartItems.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '60px 10px' }}>
+            <div style={{ textAlign: 'center', padding: '50px 10px' }}>
               <FaShoppingCart style={{ fontSize: 48, color: '#ccc', marginBottom: 16 }} />
               <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>Your BookVerse Cart is empty</h3>
               <p style={{ fontSize: 13, color: '#666', marginBottom: 18 }}>
                 Explore bestsellers, multilingual picks, and children stories to fill your cart.
               </p>
-              <button className="hero-btn-primary" onClick={onClose}>
+
+              {ordersCount > 0 && (
+                <div style={{ marginBottom: 16, padding: 14, background: '#f8f9fa', borderRadius: 8, border: '1px solid #e2e8f0', textAlign: 'left' }}>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: '#007600', marginBottom: 4, display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <FaTruck /> You have {ordersCount} order{ordersCount > 1 ? 's' : ''} on the way!
+                  </div>
+                  <div style={{ fontSize: 12, color: '#555', marginBottom: 10 }}>
+                    Track your package, view delivery dates, or re-order books in one click.
+                  </div>
+                  <button
+                    className="hero-btn-primary"
+                    style={{ width: '100%', fontSize: 13, padding: '9px 14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
+                    onClick={() => {
+                      onClose();
+                      if (onOpenOrders) onOpenOrders();
+                    }}
+                  >
+                    <FaBoxOpen /> View Your Orders &amp; Tracking
+                  </button>
+                </div>
+              )}
+
+              <button className="hero-btn-secondary" style={{ width: '100%', borderColor: '#ccc' }} onClick={onClose}>
                 Continue Shopping
               </button>
             </div>

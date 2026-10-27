@@ -442,6 +442,39 @@ app.post('/api/auth/login', async (req, res) => {
   }
 });
 
+// GET /api/orders - Fetch orders history
+app.get('/api/orders', async (req, res) => {
+  try {
+    const database = await connectDB();
+    const ordersCol = database.collection('orders');
+    const { email } = req.query;
+    const filter = email ? { 'customer.email': email } : {};
+    const orders = await ordersCol.find(filter).sort({ createdAt: -1 }).limit(50).toArray();
+    res.json({ orders });
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// POST /api/orders - Save new placed order
+app.post('/api/orders', async (req, res) => {
+  try {
+    const database = await connectDB();
+    const ordersCol = database.collection('orders');
+    const orderDoc = {
+      ...req.body,
+      createdAt: req.body.createdAt ? new Date(req.body.createdAt) : new Date(),
+      status: req.body.status || 'Confirmed - Preparing for Dispatch'
+    };
+    const result = await ordersCol.insertOne(orderDoc);
+    res.status(201).json({ success: true, order: { ...orderDoc, _id: result.insertedId } });
+  } catch (error) {
+    console.error('Error saving order:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`===============================================`);
   console.log(`Amazon Book Recommendation Server running on http://localhost:${PORT}`);

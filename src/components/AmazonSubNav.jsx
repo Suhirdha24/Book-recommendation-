@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaBars, FaBolt, FaFire, FaAward, FaChevronDown, FaUser } from 'react-icons/fa';
+import { FaBars, FaBolt, FaFire, FaAward, FaChevronDown, FaUser, FaBoxOpen } from 'react-icons/fa';
 
 const cleanAgeGroups = [
   { id: 'Kids', label: '🧒 Kids (0-8)' },
@@ -37,7 +37,9 @@ const AmazonSubNav = ({
   onToggleAllMenu,
   onShowAllBooks,
   currentUser,
-  onOpenAuth
+  onOpenAuth,
+  onOpenOrders,
+  ordersCount = 0
 }) => {
   const [showLangMenu, setShowLangMenu] = useState(false);
 
@@ -172,6 +174,26 @@ const AmazonSubNav = ({
           >
             <FaUser style={{ color: '#febd69', fontSize: 11 }} />
             <span>{currentUser ? `Hi, ${currentUser.name.split(' ')[0]}` : 'Sign In'}</span>
+          </button>
+
+          {/* Quick Orders Button */}
+          <button
+            className="sub-nav-item"
+            onClick={onOpenOrders}
+            title="Track packages and view order history"
+            id="subnav-orders-btn"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 5,
+              background: 'rgba(255, 255, 255, 0.12)',
+              borderRadius: 4,
+              padding: '4px 8px',
+              color: '#ffffff'
+            }}
+          >
+            <FaBoxOpen style={{ color: '#febd69', fontSize: 11 }} />
+            <span>Orders {ordersCount > 0 ? `(${ordersCount})` : ''}</span>
           </button>
         </div>
       </div>

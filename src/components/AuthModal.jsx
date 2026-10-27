@@ -10,7 +10,8 @@ import {
   FaSignOutAlt,
   FaCheckCircle,
   FaGlobe,
-  FaBolt
+  FaBolt,
+  FaBoxOpen
 } from 'react-icons/fa';
 
 const AuthModal = ({
@@ -21,6 +22,8 @@ const AuthModal = ({
   onLogout,
   onOpenWishlist,
   onOpenCart,
+  onOpenOrders,
+  ordersCount = 0,
   onOpenQuiz
 }) => {
   const [isRegisterMode, setIsRegisterMode] = useState(false);
@@ -215,6 +218,17 @@ const AuthModal = ({
                   style={{ width: '100%', color: '#111', borderColor: '#ccc', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
                   onClick={() => {
                     onClose();
+                    if (onOpenOrders) onOpenOrders();
+                  }}
+                >
+                  <FaBoxOpen style={{ color: '#febd69' }} /> View Your Orders &amp; Tracking ({ordersCount})
+                </button>
+
+                <button
+                  className="hero-btn-secondary"
+                  style={{ width: '100%', color: '#111', borderColor: '#ccc', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
+                  onClick={() => {
+                    onClose();
                     onOpenWishlist();
                   }}
                 >
@@ -229,7 +243,7 @@ const AuthModal = ({
                     onOpenCart();
                   }}
                 >
-                  <FaShoppingCart /> View My Cart &amp; Orders
+                  <FaShoppingCart /> View My Shopping Cart
                 </button>
 
                 <button

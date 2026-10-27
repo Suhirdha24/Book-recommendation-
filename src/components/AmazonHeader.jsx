@@ -8,7 +8,8 @@ import {
   FaHeart,
   FaUser,
   FaChevronDown,
-  FaTimes
+  FaTimes,
+  FaBoxOpen
 } from 'react-icons/fa';
 
 const languagesList = [
@@ -31,8 +32,10 @@ const AmazonHeader = ({
   setSelectedLanguage,
   cartCount,
   wishlistCount,
+  ordersCount = 0,
   onOpenCart,
   onOpenWishlist,
+  onOpenOrders,
   onOpenQuiz,
   onResetToHome,
   currentUser,
@@ -188,6 +191,35 @@ const AmazonHeader = ({
               <FaUser style={{ fontSize: 11, color: '#febd69' }} />
               <span>{currentUser ? 'Account & Lists' : 'Sign In'}</span>
               <FaChevronDown style={{ fontSize: 8, opacity: 0.8 }} />
+            </div>
+          </div>
+
+          {/* Returns & Orders */}
+          <div
+            className="nav-item"
+            onClick={onOpenOrders}
+            title="Track packages and view order history"
+            id="header-orders-btn"
+          >
+            <div className="nav-line-1">Returns</div>
+            <div className="nav-line-2" style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+              <FaBoxOpen style={{ fontSize: 13, color: '#febd69' }} />
+              <span>&amp; Orders</span>
+              {ordersCount > 0 && (
+                <span
+                  style={{
+                    backgroundColor: '#febd69',
+                    color: '#111',
+                    fontSize: 11,
+                    fontWeight: 800,
+                    borderRadius: 10,
+                    padding: '1px 6px',
+                    marginLeft: 2
+                  }}
+                >
+                  {ordersCount}
+                </span>
+              )}
             </div>
           </div>
 
