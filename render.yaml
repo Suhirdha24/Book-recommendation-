@@ -4,12 +4,10 @@ services:
     name: bookverse
     runtime: node
     plan: free
-    buildCommand: npm install && npm run build && cd server && npm install
-    startCommand: node server/server.js
+    buildCommand: npm install && npm run build
+    startCommand: npm start
     envVars:
-      - key: NODE_VERSION
-        value: 20.18.0
-      - key: PORT
-        value: 5000
+      - key: HOST
+        value: 0.0.0.0
       - key: MONGODB_URI
         value: mongodb+srv://suhirdhasivakumar_db_user:SJvAszC8ct9tKdOp@cluster0.fnmm7ku.mongodb.net/?retryWrites=true&w=majority
