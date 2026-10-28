@@ -3,31 +3,32 @@
    ========================================================================== */
 
 :root {
-  --amz-dark: #131921;
-  --amz-nav-dark: #232f3e;
-  --amz-gold: #febd69;
-  --amz-gold-hover: #f3a847;
-  --amz-yellow: #ffd814;
-  --amz-yellow-hover: #f7ca00;
-  --amz-orange: #ffa41c;
-  --amz-orange-hover: #fa8900;
-  --amz-teal: #007185;
-  --amz-teal-hover: #c7511f;
-  --amz-price-red: #B12704;
-  --amz-text: #0F1111;
-  --amz-text-muted: #565959;
-  --amz-bg: #EAEDED;
+  /* Modern Midnight Sapphire Palette */
+  --amz-dark: #090d16;
+  --amz-nav-dark: #0f172a;
+  --amz-gold: #38bdf8;
+  --amz-gold-hover: #0ea5e9;
+  --amz-yellow: #3b82f6;
+  --amz-yellow-hover: #2563eb;
+  --amz-orange: #6366f1;
+  --amz-orange-hover: #4f46e5;
+  --amz-teal: #2563eb;
+  --amz-teal-hover: #1d4ed8;
+  --amz-price-red: #0284c7;
+  --amz-text: #0f172a;
+  --amz-text-muted: #64748b;
+  --amz-bg: #f8fafc;
   --amz-card-bg: #ffffff;
-  --amz-border: #D5D9D9;
-  --amz-badge-bg: #e67a00;
-  --amz-badge-choice: #232f3e;
+  --amz-border: #e2e8f0;
+  --amz-badge-bg: #4f46e5;
+  --amz-badge-choice: #0f172a;
   
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 4px 14px rgba(15, 23, 42, 0.09);
+  --shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.14);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
   --radius-full: 9999px;
   
   --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -173,23 +174,23 @@ button {
 }
 
 .search-wrapper:focus-within {
-  box-shadow: 0 0 0 3px #f90;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.55);
 }
 
 .search-category-select {
-  background-color: #f3f3f3;
-  color: #333;
+  background-color: #f8fafc;
+  color: #334155;
   border: none;
   padding: 0 14px;
   font-size: 13px;
   font-weight: 600;
   outline: none;
   cursor: pointer;
-  border-right: 1px solid #ddd;
+  border-right: 1px solid #e2e8f0;
 }
 
 .search-category-select:hover {
-  background-color: #e2e2e2;
+  background-color: #f1f5f9;
 }
 
 .search-input {
@@ -204,18 +205,18 @@ button {
 }
 
 .search-btn {
-  background-color: var(--amz-gold);
-  color: #111;
+  background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+  color: #ffffff;
   width: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  transition: background-color 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .search-btn:hover {
-  background-color: var(--amz-gold-hover);
+  background: linear-gradient(135deg, #0ea5e9 0%, #1d4ed8 100%);
 }
 
 /* Nav Actions */
@@ -318,13 +319,14 @@ button {
   position: absolute;
   top: -6px;
   right: -10px;
-  background-color: var(--amz-orange);
-  color: #000;
+  background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+  color: #ffffff;
   font-size: 12px;
   font-weight: 800;
   border-radius: var(--radius-full);
   padding: 1px 7px;
   line-height: 1.2;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
 }
 
 /* ==========================================================================
@@ -399,21 +401,22 @@ button {
 }
 
 .sub-nav-item.highlight {
-  background: linear-gradient(90deg, #ff9900, #ffb84d);
-  color: #111;
+  background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+  color: #ffffff;
   font-weight: 700;
   padding: 5px 12px;
   border-radius: var(--radius-full);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
 }
 
 .sub-nav-item.highlight:hover {
-  background: linear-gradient(90deg, #f08c00, #ffa726);
+  background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);
   border-color: transparent;
 }
 
 .sub-nav-item.active {
-  background-color: rgba(255, 255, 255, 0.18);
-  border-color: #ffffff;
+  background-color: rgba(56, 189, 248, 0.16);
+  border-color: #38bdf8;
   color: #ffffff;
 }
 
@@ -492,7 +495,7 @@ button {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(19, 25, 33, 0.92) 0%, rgba(19, 25, 33, 0.65) 60%, rgba(19, 25, 33, 0.2) 100%);
+  background: linear-gradient(90deg, rgba(9, 13, 22, 0.95) 0%, rgba(15, 23, 42, 0.75) 60%, rgba(30, 41, 59, 0.25) 100%);
 }
 
 .hero-content {
@@ -504,15 +507,16 @@ button {
 
 .hero-tag {
   display: inline-block;
-  background-color: var(--amz-gold);
-  color: #111;
+  background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+  color: #ffffff;
   font-weight: 700;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  padding: 4px 10px;
-  border-radius: var(--radius-sm);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
   margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
 }
 
 .hero-title {
@@ -536,18 +540,19 @@ button {
 }
 
 .hero-btn-primary {
-  background-color: var(--amz-yellow);
-  color: #111;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: #ffffff;
   font-weight: 700;
   padding: 10px 24px;
   border-radius: var(--radius-full);
   font-size: 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.15s ease, transform 0.15s ease;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  transition: all 0.2s ease;
 }
 
 .hero-btn-primary:hover {
-  background-color: var(--amz-yellow-hover);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.45);
   transform: translateY(-1px);
 }
 
@@ -651,11 +656,11 @@ button {
 }
 
 .chip-btn.active {
-  background-color: #fff8e6;
-  border-color: var(--amz-gold);
-  color: #b12704;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  border-color: #2563eb;
+  color: #ffffff;
   font-weight: 700;
-  box-shadow: 0 0 0 1px var(--amz-gold);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
 }
 
 /* ==========================================================================
@@ -947,14 +952,14 @@ button {
 }
 
 .btn-add-cart {
-  background-color: var(--amz-yellow);
-  color: #0F1111;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: #ffffff;
   font-size: 12px;
   font-weight: 700;
-  padding: 7px 12px;
+  padding: 8px 12px;
   border-radius: var(--radius-full);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.15s ease;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.28);
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -962,7 +967,9 @@ button {
 }
 
 .btn-add-cart:hover {
-  background-color: var(--amz-yellow-hover);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  transform: translateY(-1px);
 }
 
 .btn-wishlist {
