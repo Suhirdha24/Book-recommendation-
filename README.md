@@ -193,6 +193,29 @@ Open your browser and navigate to **`http://localhost:3000`**.
 
 ---
 
+## 🌐 Deploy to Render
+
+You can deploy BookVerse to [Render](https://render.com/) in two ways:
+
+### Option 1: Full-Stack Web Service (Recommended)
+Deploys both the Express backend API and serves the production React build from a single URL:
+* **Service Type**: **Web Service**
+* **Environment**: `Node`
+* **Build Command**: `npm install && npm run build && cd server && npm install`
+* **Start Command**: `node server/server.js`
+* **Environment Variables**:
+  * `PORT`: `5000`
+  * `MONGODB_URI`: `mongodb+srv://suhirdhasivakumar_db_user:SJvAszC8ct9tKdOp@cluster0.fnmm7ku.mongodb.net/?retryWrites=true&w=majority`
+
+*(A preconfigured `render.yaml` blueprint is included in the root directory for 1-click deployment).*
+
+### Option 2: Static Site (Frontend Only)
+* **Service Type**: **Static Site**
+* **Build Command**: `npm install && npm run build` *(or simply `npm run build` — `prebuild` hook will auto-install dependencies)*
+* **Publish Directory**: `dist`
+
+---
+
 ## 📂 Project Directory Structure
 
 ```
@@ -226,8 +249,9 @@ Book-recommendation-/
 │   ├── app.jsx                 # Master application controller & state store
 │   └── index.jsx               # React DOM root entrypoint
 ├── public/                     # Static assets and favicons
+├── render.yaml                 # Render cloud deployment blueprint
 ├── package.json                # Project dependencies and build scripts
-├── vite.config.js              # Vite configuration
+├── vite.config.mjs             # Vite configuration (ESM native)
 └── README.md                   # Main project documentation
 ```
 

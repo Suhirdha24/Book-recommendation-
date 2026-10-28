@@ -475,8 +475,27 @@ app.post('/api/orders', async (req, res) => {
   }
 });
 
+// Serve frontend production build if available
+const path = require('path');
+const distPath = path.join(__dirname, '../dist');
+app.use(express.static(distPath));
+
+// SPA fallback for frontend build
+app.use((req, res, next) => {
+  if (req.method !== 'GET' || req.path.startsWith('/api')) {
+    return next();
+  }
+  const indexPath = path.join(distPath, 'index.html');
+  res.sendFile(indexPath, err => {
+    if (err) {
+      res.status(200).send("BookVerse API is running. Build the frontend using 'npm run build' to serve the UI.");
+    }
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`===============================================`);
   console.log(`Amazon Book Recommendation Server running on http://localhost:${PORT}`);
   console.log(`===============================================`);
 });
+
