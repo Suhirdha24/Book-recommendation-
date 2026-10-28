@@ -2,6 +2,9 @@
 
 This directory contains the REST API server and database scripts powering **BookVerse**, an Amazon-inspired multilingual book recommendation and e-commerce platform.
 
+* 🌐 **Live Production API**: [https://book-recommendation-s262.onrender.com/api](https://book-recommendation-s262.onrender.com/api)
+* 💻 **Local Development API**: `http://localhost:5000/api`
+
 ---
 
 ## 🛠️ Tech Stack & Architecture

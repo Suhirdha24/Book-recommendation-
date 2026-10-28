@@ -2,6 +2,7 @@
   "name": "bookverse",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://book-recommendation-s262.onrender.com",
   "scripts": {
     "start": "node server/server.js",
     "dev": "vite",

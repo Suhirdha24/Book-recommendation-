@@ -1,10 +1,13 @@
 # 📚 BookVerse — End-to-End Multilingual Book Recommendation & E-Commerce Platform
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-BookVerse%20on%20Render-46E3B7?style=for-the-badge&logo=render)](https://book-recommendation-s262.onrender.com/)
 [![React](https://img.shields.io/badge/Frontend-React%2018%20%7C%20Vite%20-61dafb?style=for-the-badge&logo=react)](https://reactjs.org/)
 [![Node.js](https://img.shields.io/badge/Backend-Node.js%20%7C%20Express-339933?style=for-the-badge&logo=node.js)](https://nodejs.org/)
 [![MongoDB](https://img.shields.io/badge/Database-MongoDB%20Atlas-47A248?style=for-the-badge&logo=mongodb)](https://www.mongodb.com/atlas)
 [![Theme](https://img.shields.io/badge/Theme-Modern%20Midnight%20Sapphire-38bdf8?style=for-the-badge)](https://github.com/Suhirdha24/Book-recommendation-)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
+
+> 🚀 **Live Production Website**: [https://book-recommendation-s262.onrender.com/](https://book-recommendation-s262.onrender.com/)
 
 **BookVerse** is a modern, Amazon-inspired book recommendation and e-commerce platform built for readers across **all generations** and **world languages**. Powered by a live cloud-hosted **MongoDB Atlas** cluster (`ticket-booking-platform`) and a robust **Node.js / Express** REST API, BookVerse combines sub-second Vite frontend performance with a custom **Modern Midnight Sapphire** design system.
 
@@ -109,8 +112,9 @@ Single-emoji smart pills and faceted filters to instantly discover age-appropria
 ---
 
 ## 🔌 API Endpoints Reference
-
-Base URL: `http://localhost:5000`
+ 
+* **Live Production Base URL**: `https://book-recommendation-s262.onrender.com`
+* **Local Development Base URL**: `http://localhost:5000`
 
 ### 1. Books & Recommendations
 | Method | Endpoint | Description |
@@ -194,6 +198,8 @@ Open your browser and navigate to **`http://localhost:3000`**.
 ---
 
 ## 🌐 Deploy to Render
+
+* 🔗 **Live App Deployment**: [https://book-recommendation-s262.onrender.com/](https://book-recommendation-s262.onrender.com/)
 
 You can deploy BookVerse to [Render](https://render.com/) in two ways:
 
