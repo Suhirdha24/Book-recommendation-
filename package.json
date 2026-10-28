@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "prebuild": "node -e \"try { require('vite') } catch(e) { require('child_process').execSync('npm install --legacy-peer-deps', { stdio: 'inherit' }) }\"",
     "start": "node server/server.js",
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm install --legacy-peer-deps && npm install --prefix server && vite build",
     "preview": "vite preview --host 0.0.0.0",
     "server": "node server/server.js",
     "seed": "node server/seed_data.js"
